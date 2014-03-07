@@ -1,0 +1,62 @@
+
+body {
+  font-size:16px;
+  font-family:'Raleway', sans-serif;
+  background-color:#fafae6;
+}
+h1 {
+  font-size:72px;
+  font-size:4.5rem;
+  font-weight:200;
+}
+h5 {
+  font-size: 20px;
+  font-size:1.5rem;
+}
+
+
+.bodyWrap {
+  max-width:800px;
+  position:relative;
+  margin: 0 auto;
+}
+.nav {
+  margin:0 auto;
+  width:555px;
+}
+.nav li{
+   display: inline-block;
+   box-sizing: border-box;
+   font-size:20px;
+   padding:15px 30px;
+   margin:20px 30px;
+   width:125px;
+   text-align:center;
+   color:#fafae6;
+}
+
+.orange {
+  color:#f26e11;
+  color:#FFA006;
+}
+.orangeb { 
+  background-color:#FFA006;
+}
+.black {
+  color: #13171c;
+}
+.white {
+  color:#f9edc7;
+}
+.lblue {
+  background-color:#39baa5;
+}
+.red {
+  background-color:#ee4f58;
+}
+.mblue {
+  color:#307384;
+}
+.dblue{
+  color:#0a2435;
+}
