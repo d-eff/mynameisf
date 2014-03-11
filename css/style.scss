@@ -1,7 +1,6 @@
 @import 'reset';
 
 $black: #1c1919;
-$white: #d3cbbd;
 $white: #fafafa;
 $primary: #eb5937;
 $secondary: #403d3c;
@@ -35,23 +34,21 @@ h5 {
   padding:100px 50px;
 }
 .introContainer {
-  background-color:#fff;
+  background-color:$white;
   width:100%;
+  -webkit-transition:0.5s height linear;
 }
 
 .introBox {
-  width:445px;
+  width:500px;
   height:165px;
   position:absolute;
   top:50%;
   left:50%;
   margin-left:-222px;
   margin-top:-100px;
-  -webkit-transition:0.25s top linear;
-  -webkit-transition:0.25s width linear;
-  background-color:$white;
+  background-color:#fff;
   z-index:11;
-
   h1 {
     color:$primary;
   } 
@@ -105,10 +102,41 @@ h5 {
   h1 {
     float:left;
   } 
-  h5 {
+  section {
     display:none;
   }
   ul {
-    float:right;
+    position:absolute;
+    right:10px;
   }
+}
+
+#carouselContainer {
+  height: 24px;
+  position:relative;
+  -webkit-prespective:1000px;
+  perspective:1000px;
+  h5 {
+    display:block;  
+    position:absolute;
+    -webkit-backface-visibility:hidden;
+    -webkit-transition: -webkit-transform 1s;
+  }
+  h5:nth-child(1){
+    -webkit-transform: rotateX(0deg) translateZ(24px);
+  }
+  h5:nth-child(2){
+    -webkit-transform: rotateX(120deg) translateZ(24px);
+  }
+  h5:nth-child(3){
+    -webkit-transform: rotateX(240deg) translateZ(24px);
+  }
+}
+#carousel {
+  height:100%;
+  width:100%;
+  position:absolute;
+  -webkit-transform-style:preserve-3d;
+  -webkit-transform: translateZ(24px) rotateX(0deg);
+  -webkit-transition: -webkit-transform 1s;
 }

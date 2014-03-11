@@ -1,62 +1,158 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
 
 body {
-  font-size:16px;
-  font-family:'Raleway', sans-serif;
-  background-color:#fafae6;
-}
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  font-size: 16px; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background-color: #fafafa; }
+
 h1 {
-  font-size:72px;
-  font-size:4.5rem;
-  font-weight:200;
-}
+  font-size: 72px;
+  font-size: 4.5rem;
+  font-weight: 200; }
+
 h5 {
-  font-size: 20px;
-  font-size:1.5rem;
-}
+  font-size: 24px;
+  font-size: 1.5rem; }
 
-
-.bodyWrap {
-  max-width:800px;
-  position:relative;
+#bodyContainer {
+  max-width: 1024px;
+  position: relative;
+  z-index: 1;
   margin: 0 auto;
-}
-.nav {
-  margin:0 auto;
-  width:555px;
-}
-.nav li{
-   display: inline-block;
-   box-sizing: border-box;
-   font-size:20px;
-   padding:15px 30px;
-   margin:20px 30px;
-   width:125px;
-   text-align:center;
-   color:#fafae6;
-}
+  padding: 100px 50px; }
 
-.orange {
-  color:#f26e11;
-  color:#FFA006;
-}
-.orangeb { 
-  background-color:#FFA006;
-}
-.black {
-  color: #13171c;
-}
-.white {
-  color:#f9edc7;
-}
-.lblue {
-  background-color:#39baa5;
-}
-.red {
-  background-color:#ee4f58;
-}
-.mblue {
-  color:#307384;
-}
-.dblue{
-  color:#0a2435;
-}
+.introContainer {
+  background-color: #fafafa;
+  width: 100%;
+  -webkit-transition: 0.5s height linear; }
+
+.introBox {
+  width: 500px;
+  height: 165px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -222px;
+  margin-top: -100px;
+  background-color: #fff;
+  z-index: 11; }
+  .introBox h1 {
+    color: #eb5937; }
+  .introBox h5 {
+    color: #1c1919;
+    margin: 0px 5px; }
+  .introBox ul {
+    margin: 12px 5px; }
+  .introBox li {
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-size: 1.125rem;
+    text-align: center;
+    width: 125px;
+    color: #fafafa; }
+  .introBox a {
+    text-decoration: none;
+    color: #fafafa;
+    display: block;
+    padding: 15px 30px; }
+  .introBox a:hover {
+    background-color: rgba(200, 200, 200, 0.3); }
+  .introBox ul li:nth-child(1) {
+    background-color: #eb5937; }
+  .introBox ul li:nth-child(2) {
+    background-color: #403d3c;
+    margin: 0 30px; }
+  .introBox ul li:nth-child(3) {
+    background-color: #456f74; }
+
+.menuBox {
+  width: 1024px;
+  height: 72px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -512px;
+  margin-top: 0; }
+  .menuBox h1 {
+    float: left; }
+  .menuBox section {
+    display: none; }
+  .menuBox ul {
+    position: absolute;
+    right: 10px; }
+
+#carouselContainer {
+  height: 24px;
+  position: relative;
+  -webkit-prespective: 1000px;
+  perspective: 1000px; }
+  #carouselContainer h5 {
+    display: block;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: -webkit-transform 1s; }
+  #carouselContainer h5:nth-child(1) {
+    -webkit-transform: rotateX(0deg) translateZ(24px); }
+  #carouselContainer h5:nth-child(2) {
+    -webkit-transform: rotateX(120deg) translateZ(24px); }
+  #carouselContainer h5:nth-child(3) {
+    -webkit-transform: rotateX(240deg) translateZ(24px); }
+
+#carousel {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform: translateZ(24px) rotateX(0deg);
+  -webkit-transition: -webkit-transform 1s; }
