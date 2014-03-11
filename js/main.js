@@ -1,5 +1,5 @@
 window.onload = function(){
-
+  smoothScroll.init();
   window.addEventListener('resize', resizeHead);
   resizeHead();
 
@@ -26,22 +26,69 @@ window.onload = function(){
     }
   })
 
-  var works = document.getElementById('works');
+  var nav = document.getElementById('nav');
   var xhr = new XMLHttpRequest();
-  works.addEventListener('click', function(e){
+  var page = "";
+    var bc = document.getElementById("bodyContainer");
+  nav.addEventListener('click', function(e){
     e.preventDefault();
-    xhr.open("GET", "text.txt", true);
-    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
-    xhr.onreadystatechange = oncallback;
-    xhr.send(null);
+    var target = e.target.dataset.link;
+    if(target !== page && window.scrollY > 0){
+      bc.classList.add('padded'); 
+      console.log(bc);
+      smoothScroll.animateScroll(null, '#introContainer');
+      page = target;
+
+      console.log("fetching page")
+      xhr.open("GET", page+".html", true);
+      xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+      xhr.onreadystatechange = oncallback;
+      xhr.send(null);
+    } else if (target !== page){
+       
+      bc.classList.add('padded'); 
+      page = target;
+      console.log("fetching page")
+      xhr.open("GET", page+".html", true);
+      xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+      xhr.onreadystatechange = oncallback2;
+      xhr.send(null);
+    } else if (target === page) {
+      
+      bc.classList.add('padded'); 
+        setTimeout(function(){
+          smoothScroll.animateScroll(null, '#bodyContainer');
+        
+        }, 200);
+    }
+     
   });
 
   function oncallback(){
     var bc = document.getElementById("bodyContainer");
     if(xhr.readyState === 4) { 
       if(xhr.status === 200) {
-        console.log(xhr.responseText);
-        bc.innerHTML = xhr.responseText;
+        setTimeout(function(){
+          bc.innerHTML = xhr.responseText;
+        },200);
+        
+        setTimeout(function(){
+          smoothScroll.animateScroll(null, '#bodyContainer');
+        
+        }, 1000);
+      }
+    }
+  }
+  function oncallback2(){
+    var bc = document.getElementById("bodyContainer");
+    if(xhr.readyState === 4) { 
+      if(xhr.status === 200) {
+          bc.innerHTML = xhr.responseText;
+        
+        setTimeout(function(){
+          smoothScroll.animateScroll(null, '#bodyContainer');
+        
+        }, 200);
       }
     }
   }
@@ -49,7 +96,7 @@ window.onload = function(){
 
 
 function resizeHead(){
-  var head = document.getElementsByClassName('introContainer')[0];
+  var head = document.getElementById('introContainer');
   head.style.height = window.innerHeight.toString() + "px";
 }
 
@@ -79,16 +126,20 @@ var carouselCount = 0;
 var carouselText = document.getElementsByClassName('carouselText');
 
 var aboutMe = [
-"sez leave b4 u r expunged.",
+"sez <a href=\"https://www.youtube.com/watch?v=bV-hSgL1R74\" target=\"_blank\">leave b4 u r expunged</a>.",
 "his mom thinks he's cool. (He's not.)",
-"once drank champagne from a fishbowl.",
+"once drank <a href=\"http://www.cookschampagne.com/CBICMS/cookschampagne/images/site/varieties/extra-dry_lg.jpg\" target=\"_blank\">champagne</a> from a fishbowl.",
 "played a wizard with 19 strength.",
-"makes things on the internet.",
 "drinks more coffee than is probably healthy.",
-"saw a guy say goodbye to a shoe, once.",
+"saw <a href=\"http://simpsons.wikia.com/wiki/Hank_Scorpio\" target=\"_blank\">a guy</a> say goodbye to a shoe, once.",
 "brother to the Pope of Chili Town.",
 "really likes dry-erase boards.",
 "non-GMO.",
 "bathes daily.",
-"Erd&#246;s number: infinity.",
-"makes a mean cobbler."];
+"<a href=\"http://www.oakland.edu/enp/\" target=\"_blank\">Erd&#246;s number</a>: infinity.",
+"bakes a mean cobbler.",
+"wears a lot of grey.",
+"has been to Canada.",
+"enjoys board games.",
+"has a beard.",
+"speaks really broken Spanish."];

@@ -8,12 +8,14 @@ $tertiary: #456f74;
 
 html {
   font-size: 16px;
+  overflow-y:scroll;
 }
 
 body {
   font-family: 'Raleway', sans-serif;
   font-weight:400;
   background-color:$white;
+  color:$black;
 }
 
 h1 {
@@ -21,20 +23,38 @@ h1 {
   font-size:4.5rem;
   font-weight:200;
 }
+h4 {
+  font-size:32px;
+  font-size:2rem;
+}
 h5 {
   font-size:24px;
   font-size:1.5rem;
 }
+h6 {
+  font-size:20px;
+  font-size:1.125rem;
+}
 
 #bodyContainer {
   max-width:1024px;
+  box-sizing:border-box;
   position:relative;
   z-index:1;
   margin: 0 auto;
-  padding:100px 50px;
 }
-.introContainer {
-  background-color:$white;
+.padded {
+  padding:100px 28px;
+}
+#introContainer {
+  //background-color:$white;
+
+  background: linear-gradient(to right, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(/imgs/cb.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size:cover;
+
   width:100%;
   -webkit-transition:0.5s height linear;
 }
@@ -48,6 +68,7 @@ h5 {
   margin-left:-222px;
   margin-top:-100px;
   background-color:#fff;
+
   z-index:11;
   h1 {
     color:$primary;
@@ -70,6 +91,9 @@ h5 {
   }
   a {
     text-decoration:none;
+    color:$black;
+  }
+  li a{  
     color:$white;
     display:block;
     padding:15px 30px;
@@ -139,4 +163,32 @@ h5 {
   -webkit-transform-style:preserve-3d;
   -webkit-transform: translateZ(24px) rotateX(0deg);
   -webkit-transition: -webkit-transform 1s;
+}
+
+.workList {
+  text-align:center;
+  li {
+    display:inline-block;
+    vertical-align:top;
+    max-width:250px;
+    text-align:left;
+    padding:0px 20px;
+  }
+  li img {
+    width:100%;
+  }
+  li p {
+    padding:10px 5px 40px;
+  }
+  h6 {
+    margin-top:8px;
+    font-weight:bold;
+  }
+}
+
+.listTitle { 
+  line-height:0.9;
+  color:$black;
+  border-bottom:1px solid #282828;
+  margin-bottom:20px;
 }
