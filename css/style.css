@@ -73,41 +73,25 @@ h6 {
   font-size: 1.125rem; }
 
 #bodyContainer {
-  max-width: 1024px;
+  max-width: 800px;
   box-sizing: border-box;
   position: relative;
-  z-index: 1;
-  margin: 0 auto; }
-
-.padded {
-  padding: 100px 28px; }
-
-#introContainer {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(../imgs/cb.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  width: 100%;
-  -webkit-transition: 0.5s height linear; }
+  margin: 60px auto;
+  font-family: "Open Sans", sans-serif; }
 
 .introBox {
   width: 500px;
   height: 165px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -222px;
-  margin-top: -100px;
-  background-color: #fff;
-  z-index: 11; }
+  margin: 40px auto 0;
+  text-align: center;
+  position: relative; }
   .introBox h1 {
     color: #eb5937; }
   .introBox h5 {
     color: #1c1919;
     margin: 0px 5px; }
   .introBox ul {
-    margin: 12px 5px; }
+    margin: 30px 0 0; }
   .introBox li {
     display: inline-block;
     box-sizing: border-box;
@@ -122,6 +106,7 @@ h6 {
   .introBox li a {
     color: #fafafa;
     display: block;
+    font-weight: normal;
     padding: 15px 30px; }
   .introBox a:hover {
     background-color: rgba(200, 200, 200, 0.3); }
@@ -133,24 +118,6 @@ h6 {
   .introBox ul li:nth-child(3) {
     background-color: #456f74; }
 
-.menuBox {
-  width: 1024px;
-  height: 72px;
-  box-sizing: border-box;
-  padding: 5px 10px;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  margin-left: -512px;
-  margin-top: 0; }
-  .menuBox h1 {
-    float: left; }
-  .menuBox section {
-    display: none; }
-  .menuBox ul {
-    position: absolute;
-    right: 10px; }
-
 #carouselContainer {
   height: 24px;
   position: relative;
@@ -159,6 +126,8 @@ h6 {
   #carouselContainer h5 {
     display: block;
     position: absolute;
+    text-align: center;
+    width: 500px;
     -webkit-backface-visibility: hidden;
     -webkit-transition: -webkit-transform 1s; }
   #carouselContainer h5:nth-child(1) {
@@ -182,8 +151,9 @@ h6 {
     display: inline-block;
     vertical-align: top;
     max-width: 250px;
-    text-align: left;
-    padding: 0px 20px; }
+    text-align: left; }
+  .workList li:nth-child(2) {
+    padding: 0 20px; }
   .workList li img {
     width: 100%; }
   .workList li p {
@@ -197,3 +167,11 @@ h6 {
   color: #1c1919;
   border-bottom: 1px solid #282828;
   margin-bottom: 20px; }
+
+#blog {
+  text-align: center; }
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #456f74; }

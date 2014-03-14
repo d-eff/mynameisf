@@ -1,7 +1,4 @@
 window.onload = function(){
-  smoothScroll.init();
-  window.addEventListener('resize', resizeHead);
-  resizeHead();
 
   var carouselRotator = setInterval(rotateCarousel, 5000);
   var h = window.innerHeight;
@@ -18,13 +15,6 @@ window.onload = function(){
       carouselRotator = null;
   });
 
-  window.addEventListener('scroll', function(){
-    if(window.scrollY > h/2){
-      crashMenu();
-    } else {
-      expandMenu();
-    }
-  })
 
   var nav = document.getElementById('nav');
   var xhr = new XMLHttpRequest();
@@ -34,32 +24,21 @@ window.onload = function(){
     e.preventDefault();
     var target = e.target.dataset.link;
     if(target !== page && window.scrollY > 0){
-      bc.classList.add('padded'); 
-      console.log(bc);
-      smoothScroll.animateScroll(null, '#introContainer');
       page = target;
 
-      console.log("fetching page")
       xhr.open("GET", page+".html", true);
       xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
       xhr.onreadystatechange = oncallback;
       xhr.send(null);
     } else if (target !== page){
        
-      bc.classList.add('padded'); 
       page = target;
-      console.log("fetching page")
       xhr.open("GET", page+".html", true);
       xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
       xhr.onreadystatechange = oncallback2;
       xhr.send(null);
     } else if (target === page) {
       
-      bc.classList.add('padded'); 
-        setTimeout(function(){
-          smoothScroll.animateScroll(null, '#bodyContainer');
-        
-        }, 200);
     }
      
   });
@@ -72,10 +51,6 @@ window.onload = function(){
           bc.innerHTML = xhr.responseText;
         },200);
         
-        setTimeout(function(){
-          smoothScroll.animateScroll(null, '#bodyContainer');
-        
-        }, 1000);
       }
     }
   }
@@ -85,10 +60,6 @@ window.onload = function(){
       if(xhr.status === 200) {
           bc.innerHTML = xhr.responseText;
         
-        setTimeout(function(){
-          smoothScroll.animateScroll(null, '#bodyContainer');
-        
-        }, 200);
       }
     }
   }
