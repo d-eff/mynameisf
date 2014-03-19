@@ -15,6 +15,12 @@ window.onload = function(){
       carouselRotator = null;
   });
 
+var linx = document.getElementsByClass('internal');
+for(var x = 0; x < linx.length; ++x){
+  (function(){
+    linx[x].addEventListener('click', internalLink);
+  })();
+}
 
   var nav = document.getElementById('nav');
   var xhr = new XMLHttpRequest();
@@ -82,16 +88,19 @@ function rotateCarousel(){
   carouselText[(carouselCount+1)%3].innerHTML = aboutMe[Math.random()*aboutMe.length|0]; 
 }
 
-function crashMenu(){
-  var x = document.getElementsByClassName('introBox')[0];
-  var h = document.getElementsByClassName('introContainer')[0];
-  x.classList.add('menuBox');
-//  h.style.height = h.style.height === "72px" ? window.innerHeight.toString()+"px" : "72px";
+function internalLink(e){
+  e.preventDefault();
+  var newURI = e.target.href,
+      oldPage = document.getElementsByClassName('active'),
+      newP}age = document.getElementById(newURI);
+
+  oldPage.classList.toggle('active');
+  newPage.classList.toggle('active');
+  
+  location.href += newURI;
+
 }
-function expandMenu(){
-    var x = document.getElementsByClassName('introBox')[0];
-    x.classList.remove('menuBox');
-}
+
 
 var carouselCount = 0;
 var carouselText = document.getElementsByClassName('carouselText');
