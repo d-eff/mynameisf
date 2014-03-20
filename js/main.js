@@ -1,5 +1,31 @@
 window.onload = function(){
 
+  var uri = location.pathname.split('/')[1].split('.')[0],
+      paths = document.getElementsByClassName('content'),
+      sectionIds = [];
+  
+  for(var x = 0; x < paths.length; ++x){
+    sectionIds.push(paths[x].id);
+  }
+  console.log(sectionIds);
+  
+  if(uri){
+    if(sectionIds.indexOf(uri) > -1){
+      console.log("activating " + uri);
+      activateSpecificSection(uri);
+    } else {
+      activateSpecificSection("404");
+    }
+  }
+
+  var links = document.getElementsByClassName('jumplink');
+
+  for(var x = 0; x < links.length; ++x){
+    (function(){
+      links[x].addEventListener('click', swapActiveContent);
+    })();
+  }
+
   var carouselRotator = setInterval(rotateCarousel, 5000);
   var h = window.innerHeight;
 
@@ -15,66 +41,30 @@ window.onload = function(){
       carouselRotator = null;
   });
 
-var linx = document.getElementsByClass('internal');
-for(var x = 0; x < linx.length; ++x){
-  (function(){
-    linx[x].addEventListener('click', internalLink);
-  })();
 }
 
-  var nav = document.getElementById('nav');
-  var xhr = new XMLHttpRequest();
-  var page = "";
-    var bc = document.getElementById("bodyContainer");
-  nav.addEventListener('click', function(e){
-    e.preventDefault();
-    var target = e.target.dataset.link;
-    if(target !== page && window.scrollY > 0){
-      page = target;
+function swapActiveContent(e){
+  e.preventDefault();
+  var newURI = e.target.getAttribute('href').replace(/#/, '');
+  
+  console.log("activating " + newURI);
+  activateSpecificSection(newURI);
 
-      xhr.open("GET", page+".html", true);
-      xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
-      xhr.onreadystatechange = oncallback;
-      xhr.send(null);
-    } else if (target !== page){
-       
-      page = target;
-      xhr.open("GET", page+".html", true);
-      xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
-      xhr.onreadystatechange = oncallback2;
-      xhr.send(null);
-    } else if (target === page) {
-      
-    }
-     
-  });
-
-  function oncallback(){
-    var bc = document.getElementById("bodyContainer");
-    if(xhr.readyState === 4) { 
-      if(xhr.status === 200) {
-        setTimeout(function(){
-          bc.innerHTML = xhr.responseText;
-        },200);
-        
-      }
-    }
-  }
-  function oncallback2(){
-    var bc = document.getElementById("bodyContainer");
-    if(xhr.readyState === 4) { 
-      if(xhr.status === 200) {
-          bc.innerHTML = xhr.responseText;
-        
-      }
-    }
-  }
+  var stateObj = { foo: "bar" }; 
+  history.pushState(stateObj, newURI, newURI+".html");
 }
 
+function activateSpecificSection(sectionName){
+  var oldPage = document.getElementsByClassName('active')[0],
+      newPage = document.getElementById(sectionName);
 
-function resizeHead(){
-  var head = document.getElementById('introContainer');
-  head.style.height = window.innerHeight.toString() + "px";
+  if(oldPage){
+    oldPage.classList.toggle('active');
+  }
+
+  if(newPage){
+    newPage.classList.toggle('active');
+  }
 }
 
 function rotateCarousel(){
@@ -87,20 +77,6 @@ function rotateCarousel(){
   carousel.style.webkitTransform = "translateZ(24px) rotateX(-" + degree.toString() +"deg)";
   carouselText[(carouselCount+1)%3].innerHTML = aboutMe[Math.random()*aboutMe.length|0]; 
 }
-
-function internalLink(e){
-  e.preventDefault();
-  var newURI = e.target.href,
-      oldPage = document.getElementsByClassName('active'),
-      newP}age = document.getElementById(newURI);
-
-  oldPage.classList.toggle('active');
-  newPage.classList.toggle('active');
-  
-  location.href += newURI;
-
-}
-
 
 var carouselCount = 0;
 var carouselText = document.getElementsByClassName('carouselText');
