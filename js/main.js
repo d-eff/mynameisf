@@ -1,7 +1,28 @@
 window.onload = function(){
+  var uri = location.pathname.split('/')[1].split('.')[0],
+      paths = document.getElementsByClassName('content'),
+      sectionIds = [];
 
-  //del
+  for(var x = 0; x < paths.length; ++x){
+    sectionIds.push(paths[x].id);
+  }
 
+  if(uri) {
+    if(sectionIds.indexOf(uri) > -1) {
+     activateSpecificSection(uri);
+    } else {
+      activateSpecificSection("404");
+    }
+  }
+
+  var links = document.getElementsByClassName('jumplink');
+
+  for(var x = 0; x < links.length; ++x){
+  (function(){
+   links[x].addEventListener('click', swapActiveContent);
+       })();
+  }
+  
   var carouselRotator = setInterval(rotateCarousel, 5000);
   var h = window.innerHeight;
 
@@ -23,10 +44,9 @@ function swapActiveContent(e){
   e.preventDefault();
   var newURI = e.target.getAttribute('href').replace(/#/, '');
   
-  console.log("activating " + newURI);
   activateSpecificSection(newURI);
 
-  var stateObj = { foo: "bar" }; 
+  var stateObj = { sitename: "mynameisf" }; 
   history.pushState(stateObj, newURI, newURI+".html");
 }
 
@@ -51,6 +71,7 @@ function rotateCarousel(){
   var degree = carouselCount*120;
 
   carousel.style.webkitTransform = "translateZ(24px) rotateX(-" + degree.toString() +"deg)";
+  carousel.style.transform = "translateZ(24px) rotateX(-" + degree.toString() +"deg)";
   carouselText[(carouselCount+1)%3].innerHTML = aboutMe[Math.random()*aboutMe.length|0]; 
 }
 
@@ -73,5 +94,9 @@ var aboutMe = [
 "wears a lot of grey.",
 "has been to Canada.",
 "enjoys board games.",
-"has a beard.",
-"speaks really broken Spanish."];
+"speaks really broken Spanish.",
+"abyssmally poor sculptor.",
+"JACKPOT.",
+"chicken wing connoisseur.",
+"carbon-based lifeform.",
+"<a href=\"http://www.imdb.com/title/tt0253556/quotes\" target=\"_blank\">keep both eyes on the sky.</a>"];
