@@ -15,8 +15,8 @@
       <section id="carouselContainer">
         <div id="carousel">
           <h6 class="carouselText">makes things on the internet.</h6>
-          <h6 class="carouselText">brother to the Pope of Chili Town.</h6>
-          <h6 class="carouselText">once played a Wizard with 19 strength.</h6>
+          <h6 class="carouselText">drinks more coffee than is probably healthy.</h6>
+          <h6 class="carouselText"></h6>
         </div>
       </section>
       <ul>
@@ -28,13 +28,29 @@
     </div>
 
   <div id="bodyContainer">
-    <div class="content active">
-      Hey. Sorry this probably barely renders outside of chrome at the moment.
-      <h5>Newest stuff</h5>
-      <h6><a class="jumplink" href="#blog">Abusing the HTML5 History API</a><br>Or, how this site works at the moment.</h6>
-    </div>    <!--BEGIN BLOG-->
-  <div class="content" id="blog">
-      <div class="post">
+    <div class="content active" id="main">
+      Site version: Indignant snake. Internal routing is okay. Mobile support is still spotty.     <h5>Newest stuff</h5>
+      <h6><a class="jumplink" href="#plus-operator">Javascript's Overloaded '+' Operator</a><br>Or, a descent into madness.</h6>
+      <br>
+      <br>      <h6><a class="jumplink" href="#abusing-the-history-api">Abusing the HTML5 History API</a><br>Or, how the site (sort of) works at the moment.</h6>
+    </div>    
+    <!--BEGIN BLOG-->
+  <div id="blog">
+    <div class="post content" id="plus-operator">
+      <h5>Javascript's overloaded '+' operator.</h5>
+      <h6>March 2014</h6>
+     <p>In javascript, the <span class="code">+</span> operator serves as both an actual arithmetic + operator and a string concatenation operator. <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-11.6.1">The spec</a> for this actually makes a lot of sense, and boils down to "evaluate the left and right expressions; if one (or both) is a string then treat them both as strings and concatenate them, otherwise treat them both as numbers and try to add them."</p>
+     <p>Pretty straightforward, right? <span class="code">1 + 1 = 2</span> and <span class="code">1 + "1" = "11"</span>. When arithmetic operations are chained they evaluate from left to right, so <span class="code">1 + 2 + "3" = "33"</span>.</p>
+     <p>Things get a little zany when you mix in javascript's type coercion. Arrays count as strings: <span class="code">1 + [] = "1"</span>, as do objects: <span class="code">1 + {} = "1object Object"</span>. Booleans are, predictably, numbers: <span class="code">1 + true = 2</span> (and <span class="code">true + true = 2</span> - treat everything as a number unless a string shows up), and null is, well, null: <span class="code">1 + null = 1</span>. Rounding out the built-in types, <span class="code">1 + undefined = NaN</span> -
+     not wholly surprising, though I had expected it to behave more like null.</p>
+     <p>Mixing types gets more confusing. <span class="code">1 + [1] = "11"</span> because the array is considered a string and its contents are cast to a string, including the commas: <span class="code">1 + [1,1] = "11,1"</span> - unless the contents are null or undefined: <span class="code">1 + [null] = "1"</span>, <span class="code">1 + [undefined] = "1"</span>. Despite being considered a string when paired with a number - again, <span class="code">1 + {} = "1object
+       Object"</span> - objects sometimes act like numbers: <span class="code">{} + null = 0</span>, and <span class="code">{} + undefined = NaN</span>.</p>
+     <p>Because they're not overloaded, the other arithmetic operators do their best to treat both sides of an expression as a number. So <span class="code">"1" + 1 = "11"</span>, but <span class="code">"1" - 1 = 0</span>. Every built-in type except for object (which throws a SyntaxError) reacts like a number when met with '-', '*', or '/', including array, which casts to 0 unless it contains something: <span class="code">[] * 1 = 0</span>, <span class="code">["1"] * 2 = 2</span>.
+     <span class="code">[{}] * 1 = NaN</span>, of course, because... the object gets cast to undefined? But <span class="code">[{}] + 1 = "[object Object]1"</span>. Okay, I have a nosebleed. We're done here.
+     </p>
+     <p>My point is, dynamic typing + overloaded arithmetic operators give me a headache. As an exercise to the reader, I leave the following: <span class="code">["10"]/(true+true) = ?</span>. Next week, why <span class="code">NaN !== NaN</span> (I'm kidding please no more).</p>
+    </div>
+      <div class="post content" id="abusing-the-history-api">
         <h5>Abusing the HTML5 History API</h5>
         <h6>March 2014</h6>
         <p>
@@ -52,6 +68,49 @@
             <li>A <span class="code">title</span> object - the docs say it's looking for a string, but as far as I can tell this arg still isn't being used anywhere. All four major browsers (tested on Windows and Linux, at least) display the page's actual <span class="code">title</span> tag in the history.</li>
             <li>The <span class=code>URL</span> you want to use. It can be relative.</li>
           </ul>
+          <p><em>That's great, how are you actually using it?</em> At the moment this site is a single page dressed up as a multi-page site by selectively showing content based on the url. Nav links are set up like normal jump-links with hrefs pointing to #ids on the page. When one is clicked, we display that section, hide the others, and push an updated URL to the history. Like I mentioned above, updating the url via the history API doesn't refresh the page, so we only have a single
+          page to worry about loading and painting. The same index page is served up whenever as both the root and 404 pages, and then a (for lack of a better term) router reads the path and displays the appropriate section (including a 404 section).</p>
+          <p>This solution isn't all great - for one thing, everything is currently dumped into one giant HTML file. This makes updating the blog a bit ponderous, and will potentially lead to loading speed issues once the file has grown large enough. Also, while the CSS is designed to turn the page into one long one-pager and the jumplinks will still work without JS, the routing is nonfunctional without javascript. The first problem could be solved by switching from a true one-pager to
+          dynamically loading the content with ajax while keeping the rest of the page static and retaining the history API use.</p><p>Of course, a week from now I'll probably just rebuild this whole site in Angular, or something.</p>
+      </div>
+      <div class="post content" id="2013-reading-list">
+        <h5>An incomplete list of books I read in 2013</h5>        
+        <h6>January 2014</h6>
+        <p class="two-col">
+City of Thieves - David Benioff
+<br>Cold Days - Jim Butcher
+<br>Dune - Frank Herbert
+<br>Dune Messiah - Frank Herbert
+<br>Eisenhorn: Hereticus - Dan Abnett
+<br>Eisenhorn: Malleus - Dan Abnett
+<br>Eisenhorn: Xenos - Dan Abnett
+<br>The Forever War - Joe Haldeman
+<br>Gaunt's Ghosts: First and Only - Dan Abnett
+<br>Gaunt's Ghosts: Ghost Maker - Dan Abnett
+<br>Gaunt's Ghosts: Guns of Tanith - Dan Abnett
+<br>Gaunt's Ghosts: Honor Guard - Dan Abnett
+<br>Gaunt's Ghosts: Necropolis - Dan Abnett
+<br>Gaunt's Ghosts: Sabbat Matyr - Dan Abnett
+<br>Gaunt's Ghosts: Straight Silver - Dan Abnett
+<br>The Ghost Brigades - John Scalzi
+<br>The Golem and the Jinni - Helene Wecker
+<br>The Last Colony - John Scalzi
+<br>Learn Ruby on Rails - Daniel Kehoe
+<br>The Maltese Falcon - Dashiell Hammett
+<br>The Name of the Wind [RR] - Patrick Rothfuss
+<br>Neuromancer [RR] - William Gibson 
+<br>Neverwhere [RR]- Neil Gaiman
+<br>Old Man's War - John Scalzi
+<br>Responsive Web Design - Ethan Marcotte
+<br>The Stars My Destination [RR] - Alfred Bester
+<br>The Way of Kings - Brandon Sanderson
+<br>The Wise Man's Fear [RR] - Patrick Rothfuss
+        </p>
+        <p>
+        I went on a military sci-fi kick early in the year, which culminated in devouring entirely more 40k novels than I'd care to admit. I don't play Warhammer, but I think the universe is neat and - credit where it's due - Dan Abnett is a fine author. 
+        </p>
+        <p>Dune was my favorite new read of the year - I remember failing to get past the first page in high school, but I borrowed it from a friend in June and read it twice in about a week.</p>
+        <p>Only two technical books made the list, partially because I wasn't in the habit of reading technical books until recently and partially because I have another three which are nearly finished and will make the 2014 list. Goal this year: more technical books, less genre fiction.</p>
       </div>
   </div>
     <!--END BLOG-->
@@ -59,30 +118,28 @@
       <!--BEGIN WORK SECTION-->
 <div class="content" id="work">
 <ul class="workList">
-  <li><img src="/imgs/screenChat.jpg"><h6>Thesaurize</h6><p>An off-joke about needing to improve one's english turned into a silly chat room. My first node project bigger than 'hello world'.</p></li>
-  <li><img src="/imgs/screenGA.jpg"><h6>GA Budget Thing</h6><p>D3 + Angular + Node. WIP.</p></li>
-  <li><img src="/imgs/screenCats.jpg"><h6>Horoscope Cats</h6><p>Javascript, stolen cat images, and too many beers.</p></li>
-</ul>
-<ul class="workList">
-  <li><img src="/imgs/screenFlour.jpg"><h6>Teresa Flour Lamb</h6><p>Portfolio site for a friend. She designed, I built. Fully responsive.</p></li>
-  <li><img src="/imgs/screenSTT.jpg"><h6>South Tampa Title</h6><p>Site for a former employer. Totes responsivo. Also I wrote all the copy.</p></li>
-  <li><img src="/imgs/screenMartin.jpg"><h6>Martineando punto com</h6><p>MAMI LLEGO TU PAPI CON EL FUNKETE, SACUDELO</p></li>
-</ul>
-<ul class="workList">
-  <li><img src="http://placehold.it/250x155"><h6>Nathan Fernandez</h6><p></p></li>
-  <li><img src="http://placehold.it/250x155"><p></p></li>
-  <li><img src="http://placehold.it/250x155"><p>This is a thing</p></li>
-  <li><img src="http://placehold.it/250x155"><p>This is a thing</p></li>
+  <li><a href="http://fictionalcorp.com/chat.html"><img src="/imgs/screenChat.jpg"></a><h6><a href="http://fictionalcorp.com/chat.html">Thesaurize</a></h6><p>An off-joke about needing to improve one's english turned into a silly chat room.<br><br>Node, Express, Socket.io</p></li>
+  <li><a href="http://www.teresaflourlamb.com/"><img src="/imgs/screenFlour.jpg"></a><h6><a href="http://www.teresaflourlamb.com/">Teresa Flour Lamb</a></h6><p>Portfolio site for a friend. She designed, I built. Fully responsive.<br><br>HTML5, CSS3</p></li>
+  <li><a href="http://gabudget.org/"><img src="/imgs/screenGA.jpg"></a><h6><a href="http://gabudget.org/">GA Budget Project</a></h6><p>Working with a friend to bring more transparency and accessibility to the Georgia state budget. <strong>Work in progress.</strong><br><br>D3, Angular, Node</p></li>
+  <li><a href="http://www.southtampatitle.com/"><img src="/imgs/screenSTT.jpg"></a><h6><a href="http://www.southtampatitle.com/">South Tampa Title</a></h6><p>Site for a title company in my hometown. Responsive.<br><br>HTML5, CSS3</p></li>
+  <li><a href="http://content.opportunityknocks.org/"><img src="/imgs/screenOK.jpg" alt="screen shot of content.opportunityknocks.org"></a><h6><a href="http://content.opportunityknocks.org">Opportunity Knocks Blog</a></h6><p>Custom Wordpress theme for Opportunity Knocks. Matches the style of their main site.<br><br>HTML, CSS, PHP</p></li>
+  <li><a href="http://mynameisf.com/demos/horo/cats"><img src="/imgs/screenCats.jpg"></a><h6><a href="http://mynameisf.com/demos/horo/cats">Horoscope Cats</a></h6><p>In case you want to know what the stars have in store for you this week.<br><br>Javascript, cat images, whiskey</p></li>
+
+  <li><a href="http://www.martineando.com/"><img src="/imgs/screenMartin.jpg"></a><h6><a href="http://www.martineando.com/">Martineando punto com</a></h6><p>Present for a, er, friend. MAMI LLEGO TU PAPI CON EL FUNKETE, SACUDELO.<br><br>Canvas, JS, beer (Noticing a pattern?)</p></li>
 </ul>
 </div>
 <!--END WORK -->
 
 <!--BEGIN ABOUT-->
 <div id="about" class="content">
-  <img src="imgs/headshot_sm.png" alt="this is my default face.">
-<p>Web developer. Decent cook. Serious nerd.<br><br><a href="https://twitter.com/d_eff">follow me on twitter</a> (though I don't tweet much.)<br><br><a href="https://github.com/d-eff">check out my repos</a> (if that's your thing)</p></div>
+  <figure>
+  <img id="headshot" src="imgs/headshot0.png" alt="I swear, this was the least obnoxious photo of me.">
+  <figcaption id="newPic">To do: get a less obnoxious photo.</figcaption>
+  </figure>
+  
+  <p>Developer. Decent cook. Serious nerd.<br><br><br>contact me: <a href="mailto:dfernandez06@gmnorobotsail.com" id="email">dfernandez06@gmnorobotsail.com</a><br><br><a href="https://twitter.com/d_eff">follow me on twitter</a> (though I don't tweet much.)<br><br><a href="https://github.com/d-eff">check out my repos</a> (if that's your thing)</p></div>
 <!--END ABOUT-->
-<div id="404" class="content">
+<div id="four04" class="content">
   <p>Sorry, can't find that. Hit me up, I guess. This whole site is a test bed, so I can't really promise anything will be around for more time than it takes me to break it.</p>
   <p>Insert a cool 404 game or something here, I guess.</p>
 </div>

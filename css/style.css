@@ -74,6 +74,12 @@ h6 {
   font-size: 20px;
   font-size: 1.25rem; }
 
+em {
+  font-style: italic; }
+
+strong {
+  font-weight: bold; }
+
 a:hover {
   background-color: rgba(200, 200, 200, 0.3); }
 
@@ -186,7 +192,20 @@ a:hover {
   font-family: monospace;
   font-size: 15px;
   background-color: rgba(230, 230, 230, 0.8);
-  padding: 1px; }
+  padding: 0px 1px;
+  border: 1px solid #cacaca;
+  border-radius: 2px; }
+#blog .two-col {
+  -webkit-columns: 2;
+  columns: 2; }
+#blog .post {
+  margin-bottom: 100px; }
+  #blog .post h5 {
+    margin: 15px 0px 5px; }
+  #blog .post h6 {
+    font-size: 18px;
+    font-size: 1.125rem;
+    margin: 0px 0px 10px; }
 #blog ul {
   list-style: initial;
   line-height: 1.4;
@@ -204,10 +223,12 @@ a:hover {
   text-align: center; }
   .workList li {
     display: inline-block;
+    box-sizing: initial;
     vertical-align: top;
     max-width: 250px;
-    text-align: left; }
-  .workList li:nth-child(2) {
+    text-align: left;
+    margin-bottom: 20px; }
+  .workList li:nth-child(3n+2) {
     padding: 0 20px; }
   .workList li img {
     width: 100%; }
@@ -220,9 +241,55 @@ a:hover {
 
 #about {
   text-align: center; }
+  #about figcaption {
+    font-size: 13px;
+    font-size: 0.8125rem;
+    font-style: italic;
+    cursor: pointer; }
 
 canvas {
   position: fixed;
   top: 0px;
   left: 0px;
   overflow: hidden; }
+
+@media (max-width: 850px) {
+  .workList li:nth-child(3n+2) {
+    padding: 0px; }
+  .workList li:nth-child(2n) {
+    padding: 0 20px; } }
+@media (max-width: 650px) {
+  .workList li {
+    max-width: 180px; } }
+@media screen and (max-width: 450px) {
+  canvas {
+    display: none; }
+
+  #carouselContainer h6 {
+    width: 430px; }
+  #carouselContainer h6:nth-child(2), #carouselContainer h6:nth-child(3) {
+    display: none; }
+
+  .introBox {
+    width: 431px; }
+    .introBox ul li:nth-child(2) {
+      margin: 0 10px; }
+
+  .content {
+    display: block; }
+
+  #four04 {
+    display: none; } }
+@media screen and (max-width: 340px) {
+  .introBox {
+    width: 100%; }
+
+  #carouselContainer h6 {
+    width: 320px; }
+
+  #main {
+    margin-bottom: 60px; }
+
+  .workList li:nth-child(n) {
+    max-width: 270px;
+    padding: 0px; } }
