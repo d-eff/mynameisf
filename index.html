@@ -7,11 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="/css/ie.css">
+    <![endif]-->
+    <script src="modernizr.custom.20684.js" type="text/javascript"></script>
   </head>
   <body>
     <canvas id="canvas"></canvas>
     <div class="introBox">
       <h1><a href="/">David F</a></h1>
+      <div id="mobileMenu"><img src="/imgs/threelines_sm.png"></div>
       <section id="carouselContainer">
         <div id="carousel">
           <h6 class="carouselText">makes things on the internet.</h6>
@@ -29,7 +34,6 @@
 
   <div id="bodyContainer">
     <div class="content active" id="main">
-      Site version: Indignant snake. Internal routing is okay. Mobile support is still spotty.     <h5>Newest stuff</h5>
       <h6><a class="jumplink" href="#plus-operator">Javascript's Overloaded '+' Operator</a><br>Or, a descent into madness.</h6>
       <br>
       <br>      <h6><a class="jumplink" href="#abusing-the-history-api">Abusing the HTML5 History API</a><br>Or, how the site (sort of) works at the moment.</h6>
@@ -37,8 +41,8 @@
     <!--BEGIN BLOG-->
   <div id="blog">
     <div class="post content" id="plus-operator">
-      <h5>Javascript's overloaded '+' operator.</h5>
       <h6>March 2014</h6>
+      <h5>Javascript's overloaded '+' operator.</h5>
      <p>In javascript, the <span class="code">+</span> operator serves as both an actual arithmetic + operator and a string concatenation operator. <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-11.6.1">The spec</a> for this actually makes a lot of sense, and boils down to "evaluate the left and right expressions; if one (or both) is a string then treat them both as strings and concatenate them, otherwise treat them both as numbers and try to add them."</p>
      <p>Pretty straightforward, right? <span class="code">1 + 1 = 2</span> and <span class="code">1 + "1" = "11"</span>. When arithmetic operations are chained they evaluate from left to right, so <span class="code">1 + 2 + "3" = "33"</span>.</p>
      <p>Things get a little zany when you mix in javascript's type coercion. Arrays count as strings: <span class="code">1 + [] = "1"</span>, as do objects: <span class="code">1 + {} = "1object Object"</span>. Booleans are, predictably, numbers: <span class="code">1 + true = 2</span> (and <span class="code">true + true = 2</span> - treat everything as a number unless a string shows up), and null is, well, null: <span class="code">1 + null = 1</span>. Rounding out the built-in types, <span class="code">1 + undefined = NaN</span> -
@@ -49,10 +53,11 @@
      <span class="code">[{}] * 1 = NaN</span>, of course, because... the object gets cast to undefined? But <span class="code">[{}] + 1 = "[object Object]1"</span>. Okay, I have a nosebleed. We're done here.
      </p>
      <p>My point is, dynamic typing + overloaded arithmetic operators give me a headache. As an exercise to the reader, I leave the following: <span class="code">["10"]/(true+true) = ?</span>. Next week, why <span class="code">NaN !== NaN</span> (I'm kidding please no more).</p>
+     <hr>
     </div>
       <div class="post content" id="abusing-the-history-api">
-        <h5>Abusing the HTML5 History API</h5>
         <h6>March 2014</h6>
+        <h5>Abusing the HTML5 History API</h5>
         <p>
           Everyone agrees <a href="http://en.wikipedia.org/wiki/Flash_of_unstyled_content">FOUC</a> is bad, but lately I've been opposed to any sort of visible flash while changing pages on a single domain (unless there's meant to be a context change). I'm not sure if this feeling is driven by some nostalgia for the animated-transition-laden flash sites of my youth, or in spite of them - either way, it's strange to me to still be loading whole new pages with 40% repeated content almost a decade after AJAX became a buzzword.
           </p>
@@ -72,10 +77,11 @@
           page to worry about loading and painting. The same index page is served up whenever as both the root and 404 pages, and then a (for lack of a better term) router reads the path and displays the appropriate section (including a 404 section).</p>
           <p>This solution isn't all great - for one thing, everything is currently dumped into one giant HTML file. This makes updating the blog a bit ponderous, and will potentially lead to loading speed issues once the file has grown large enough. Also, while the CSS is designed to turn the page into one long one-pager and the jumplinks will still work without JS, the routing is nonfunctional without javascript. The first problem could be solved by switching from a true one-pager to
           dynamically loading the content with ajax while keeping the rest of the page static and retaining the history API use.</p><p>Of course, a week from now I'll probably just rebuild this whole site in Angular, or something.</p>
+          <hr>
       </div>
       <div class="post content" id="2013-reading-list">
-        <h5>An incomplete list of books I read in 2013</h5>        
         <h6>January 2014</h6>
+        <h5>An incomplete list of books I read in 2013</h5>        
         <p class="two-col">
 City of Thieves - David Benioff
 <br>Cold Days - Jim Butcher
@@ -132,12 +138,41 @@ City of Thieves - David Benioff
 
 <!--BEGIN ABOUT-->
 <div id="about" class="content">
-  <figure>
   <img id="headshot" src="imgs/headshot0.png" alt="I swear, this was the least obnoxious photo of me.">
-  <figcaption id="newPic">To do: get a less obnoxious photo.</figcaption>
-  </figure>
   
-  <p>Developer. Decent cook. Serious nerd.<br><br><br>contact me: <a href="mailto:dfernandez06@gmnorobotsail.com" id="email">dfernandez06@gmnorobotsail.com</a><br><br><a href="https://twitter.com/d_eff">follow me on twitter</a> (though I don't tweet much.)<br><br><a href="https://github.com/d-eff">check out my repos</a> (if that's your thing)</p></div>
+  <p>Developer. Decent cook. Serious nerd.</p>
+  
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <a href="mailto:dfernandez06@gmail.com"><img src="/imgs/email_icon.png" alt="/imgs/email_icon.png" alt="email envelope icon"></a>
+      </td>
+      <td> 
+        <a href="mailto:dfernandez06@gmail.com">dfernandez06@gmail.com</a>
+      </td>
+      </tr> 
+    <tr>
+      <td>    
+        <a href="https://github.com/d-eff"><img src="/imgs/github_icon.png" alt="github octocat icon"></a>
+      </td>
+      <td>    
+  <a href="https://github.com/d-eff">d-eff</a>
+      </td>
+    </tr>
+      <tr>
+        <td>
+          <a href="https://twitter.com/d_eff"><img src="/imgs/twitter_icon.png" alt="twitter bird icon"></a>
+      </td>
+        <td>
+  <a href="https://twitter.com/d_eff">@d_eff</a>
+      </td>
+    </tr> 
+    </tbody>
+  </table>  
+  
+  
+</div>
 <!--END ABOUT-->
 <div id="four04" class="content">
   <p>Sorry, can't find that. Hit me up, I guess. This whole site is a test bed, so I can't really promise anything will be around for more time than it takes me to break it.</p>

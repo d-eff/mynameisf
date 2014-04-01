@@ -1,17 +1,9 @@
-@import 'reset';
 
 $black: #1c1919;
 $white: #fafafa;
 $primary: #eb5937;
 $secondary: #403d3c;
 $tertiary: #456f74;
-
-@mixin transform($transform){ 
-    -webkit-transform: $transform;
-    -moz-transform: $transform;
-    -ms-transform: $transform;
-    transform: $transform;
-}
 
 html {
   font-size: 16px;
@@ -28,16 +20,13 @@ body {
 
 h1 {
   font-size:56px;
-  font-size:3.5rem;
   font-weight:200;
 }
 h5 {
-  font-size:28px;
-  font-size:1.75rem;
+  font-size:24px;
 }
 h6 {
   font-size:20px;
-  font-size:1.25rem;
 }
 em {
   font-style: italic;
@@ -104,50 +93,16 @@ strong {
 #carouselContainer {
   height: 20px;
   position:relative;
-  -webkit-perspective:1000000px;
-  -moz-perspective:1000000px;
-  -ms-perspective:1000000px; 
-  perspective:1000000px;
 
   h6 {
     display:block;  
     position:absolute;
     text-align:center;
     width:450px;
-
-    -webkit-backface-visibility:hidden;
-    backface-visibility: hidden;
-
-    -webkit-transition: -webkit-transform 1s;
-    -moz-transition: -webkit-transform 1s;
-    -ms-transition: -webkit-transform 1s;
-    transition: transform 1s;
   }
-  h6:nth-child(1){
-    @include transform(rotateX(0deg) translateZ(20px));
+  h6 ~ h6{
+    display:none;
   }
-  h6:nth-child(2){
-    @include transform(rotateX(120deg) translateZ(20px));
-  }
-  h6:nth-child(3){
-    @include transform(rotateX(240deg) translateZ(20px));
-  }
-}
-#carousel {
-  height:100%;
-  width:100%;
-  position:absolute;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  -ms-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-
-  @include transform(translateZ(20px) rotateX(0deg));
-  
-  -webkit-transition: -webkit-transform 1s;
-  -moz-transition: -moz-transform 1s;
-  -ms-transition: -ms-transform 1s;
-  transition: transform 1s;
 }
 
 #bodyContainer {
@@ -168,9 +123,6 @@ strong {
     padding:10px 5px;
   }
 }
-#mobileMenu {
-  display:none;    
-}
 
 #blog {
   .code {
@@ -178,25 +130,18 @@ strong {
     font-size:15px;
     background-color:rgba(230,230,230,0.8);
     padding:0px 1px;
+    border:1px solid #cacaca;
     border-radius:2px;
-  }
-  .two-col{
-    -webkit-columns:2;
-    columns: 2;
   }
   .post {
     margin-bottom:100px;
     h5 {
-      margin: 5px 0px 10px;
+      margin: 15px 0px 5px;
     }
     h6 {
       font-size:18px;
       font-size:1.125rem;
-      margin:15px 0px 0px;
-      color:$primary;
-    }
-    p {
-      background-color:$white;
+      margin:0px 0px 10px;
     }
   }
   ul {
@@ -207,23 +152,13 @@ strong {
   li {
     padding:5px 0;
   }
-  hr {
-    margin-top:50px;
-  }
 }
 
-.content {
-  display:none;
-}
-.active {
-  display:block;
-}
 
 .workList {
   text-align:center;
   li {
     display:inline-block;
-    box-sizing:initial;
     vertical-align:top;
     max-width:250px;
     text-align:left;
@@ -253,83 +188,13 @@ strong {
     font-style:italic;
     cursor:pointer;
   }
-  table {
-    margin: 0 auto;
-  }
-  td {
-    vertical-align: middle;
-    text-align: left;
-    padding:8px 10px;
-  }
-  td:nth-child(odd) a {
-    display:block;
-  }
+}
+
+#four04 {
+  display:none;
 }
 
 canvas {
-  position:fixed;
-  top:0px;
-  left:0px;
-  overflow:hidden;
-}
-
-@media (max-width:850px){
-  .workList { 
-    li:nth-child(3n+2){
-      padding:0px;
-    }
-    li:nth-child(2n){
-      padding:0 20px;
-    }
-  }  
-}
-
-@media (max-width:650px){
-  .workList {
-    li {
-      max-width:180px;
-    }
-  }
-}
-
-
-@media screen and (max-width:450px){
-  canvas {
-    display:none;
-  }
-  #carouselContainer{
-    display:none;
-  }
-  #mobileMenu {
-    display:inline-block;
-    float:right;
-  }
-  .introBox {
-    width:100%;
-    padding:0px 20px;
-    text-align:left;
-    h1 {
-      float:left;
-    }
-    ul {
-      display:none;
-    }
-  }
-  .content {
-    display:block;
-  }
-    #four04 {
-    display:none;
-  }
-}
-
-@media screen and (max-width:340px){
-  #main {
-    margin-bottom:60px;
-  }
-  .workList li:nth-child(n) {
-    max-width:270px;
-    padding:0px;
-  }
+  display:none;
 }
 

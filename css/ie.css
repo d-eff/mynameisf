@@ -63,16 +63,13 @@ body {
 
 h1 {
   font-size: 56px;
-  font-size: 3.5rem;
   font-weight: 200; }
 
 h5 {
-  font-size: 28px;
-  font-size: 1.75rem; }
+  font-size: 24px; }
 
 h6 {
-  font-size: 20px;
-  font-size: 1.25rem; }
+  font-size: 20px; }
 
 em {
   font-style: italic; }
@@ -124,54 +121,14 @@ a:hover {
 
 #carouselContainer {
   height: 20px;
-  position: relative;
-  -webkit-perspective: 1000000px;
-  -moz-perspective: 1000000px;
-  -ms-perspective: 1000000px;
-  perspective: 1000000px; }
+  position: relative; }
   #carouselContainer h6 {
     display: block;
     position: absolute;
     text-align: center;
-    width: 450px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transition: -webkit-transform 1s;
-    -moz-transition: -webkit-transform 1s;
-    -ms-transition: -webkit-transform 1s;
-    transition: transform 1s; }
-  #carouselContainer h6:nth-child(1) {
-    -webkit-transform: rotateX(0deg) translateZ(20px);
-    -moz-transform: rotateX(0deg) translateZ(20px);
-    -ms-transform: rotateX(0deg) translateZ(20px);
-    transform: rotateX(0deg) translateZ(20px); }
-  #carouselContainer h6:nth-child(2) {
-    -webkit-transform: rotateX(120deg) translateZ(20px);
-    -moz-transform: rotateX(120deg) translateZ(20px);
-    -ms-transform: rotateX(120deg) translateZ(20px);
-    transform: rotateX(120deg) translateZ(20px); }
-  #carouselContainer h6:nth-child(3) {
-    -webkit-transform: rotateX(240deg) translateZ(20px);
-    -moz-transform: rotateX(240deg) translateZ(20px);
-    -ms-transform: rotateX(240deg) translateZ(20px);
-    transform: rotateX(240deg) translateZ(20px); }
-
-#carousel {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transform: translateZ(20px) rotateX(0deg);
-  -moz-transform: translateZ(20px) rotateX(0deg);
-  -ms-transform: translateZ(20px) rotateX(0deg);
-  transform: translateZ(20px) rotateX(0deg);
-  -webkit-transition: -webkit-transform 1s;
-  -moz-transition: -moz-transform 1s;
-  -ms-transition: -ms-transform 1s;
-  transition: transform 1s; }
+    width: 450px; }
+  #carouselContainer h6 ~ h6 {
+    display: none; }
 
 #bodyContainer {
   max-width: 840px;
@@ -188,49 +145,32 @@ a:hover {
     line-height: 1.4;
     padding: 10px 5px; }
 
-#mobileMenu {
-  display: none; }
-
 #blog .code {
   font-family: monospace;
   font-size: 15px;
   background-color: rgba(230, 230, 230, 0.8);
   padding: 0px 1px;
+  border: 1px solid #cacaca;
   border-radius: 2px; }
-#blog .two-col {
-  -webkit-columns: 2;
-  columns: 2; }
 #blog .post {
   margin-bottom: 100px; }
   #blog .post h5 {
-    margin: 5px 0px 10px; }
+    margin: 15px 0px 5px; }
   #blog .post h6 {
     font-size: 18px;
     font-size: 1.125rem;
-    margin: 15px 0px 0px;
-    color: #eb5937; }
-  #blog .post p {
-    background-color: #fafafa; }
+    margin: 0px 0px 10px; }
 #blog ul {
   list-style: initial;
   line-height: 1.4;
   margin-left: 25px; }
 #blog li {
   padding: 5px 0; }
-#blog hr {
-  margin-top: 50px; }
-
-.content {
-  display: none; }
-
-.active {
-  display: block; }
 
 .workList {
   text-align: center; }
   .workList li {
     display: inline-block;
-    box-sizing: initial;
     vertical-align: top;
     max-width: 250px;
     text-align: left;
@@ -253,58 +193,9 @@ a:hover {
     font-size: 0.8125rem;
     font-style: italic;
     cursor: pointer; }
-  #about table {
-    margin: 0 auto; }
-  #about td {
-    vertical-align: middle;
-    text-align: left;
-    padding: 8px 10px; }
-  #about td:nth-child(odd) a {
-    display: block; }
+
+#four04 {
+  display: none; }
 
 canvas {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  overflow: hidden; }
-
-@media (max-width: 850px) {
-  .workList li:nth-child(3n+2) {
-    padding: 0px; }
-  .workList li:nth-child(2n) {
-    padding: 0 20px; } }
-@media (max-width: 650px) {
-  .workList li {
-    max-width: 180px; } }
-@media screen and (max-width: 450px) {
-  canvas {
-    display: none; }
-
-  #carouselContainer {
-    display: none; }
-
-  #mobileMenu {
-    display: inline-block;
-    float: right; }
-
-  .introBox {
-    width: 100%;
-    padding: 0px 20px;
-    text-align: left; }
-    .introBox h1 {
-      float: left; }
-    .introBox ul {
-      display: none; }
-
-  .content {
-    display: block; }
-
-  #four04 {
-    display: none; } }
-@media screen and (max-width: 340px) {
-  #main {
-    margin-bottom: 60px; }
-
-  .workList li:nth-child(n) {
-    max-width: 270px;
-    padding: 0px; } }
+  display: none; }
