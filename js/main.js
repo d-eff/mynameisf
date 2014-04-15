@@ -55,7 +55,7 @@ window.onload = function () {
 
     //janked-up router. todo: scrap this
     var uri = location.pathname.split('/')[1].split('.')[0],
-        paths = document.getElementsByClassName('content'),
+        paths = document.querySelectorAll('.content'),
         sectionIds = [];
 
     for (var x = 0; x < paths.length; ++x) {
@@ -78,7 +78,7 @@ window.onload = function () {
     }
 
     //event listeners for internal links
-    var links = document.getElementsByClassName('jumplink');
+    var links = document.querySelectorAll('.jumplink');
     for (var y = 0; y < links.length; ++y) {
      links[y].addEventListener('click', swapActiveContent);
     }
@@ -142,7 +142,7 @@ var canvas,
     ctx;
 
 function activateSpecificSection(sectionName){
-  var oldPages = document.getElementsByClassName('active'),
+  var oldPages = document.querySelectorAll('.active'),
       newPage = document.getElementById(sectionName);
 
   for(var itm = oldPages.length-1; itm >= 0; --itm){ 
@@ -166,7 +166,6 @@ function activateSpecificSection(sectionName){
 
 function rotateCarousel(){
   var carousel = document.getElementById('carousel');
-  var carouselText = document.getElementsByClassName('carouselText');
 
   carouselCount++;
   var degree = carouselCount*120;
@@ -180,7 +179,7 @@ function rotateCarousel(){
 }
 
 var carouselCount = 0;
-var carouselText = document.getElementsByClassName('carouselText');
+var carouselText = document.querySelectorAll('.carouselText');
 
 var aboutMe = [
 "sez <a href=\"https://www.youtube.com/watch?v=bV-hSgL1R74\" target=\"_blank\">leave b4 u r expunged</a>.",

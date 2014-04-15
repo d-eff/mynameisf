@@ -188,9 +188,6 @@ a:hover {
     line-height: 1.4;
     padding: 10px 5px; }
 
-#mobileMenu {
-  display: none; }
-
 #blog .code {
   font-family: monospace;
   font-size: 15px;
@@ -230,6 +227,7 @@ a:hover {
   text-align: center; }
   .workList li {
     display: inline-block;
+    -moz-box-sizing: initial;
     box-sizing: initial;
     vertical-align: top;
     max-width: 250px;
@@ -283,18 +281,17 @@ canvas {
   #carouselContainer {
     display: none; }
 
-  #mobileMenu {
-    display: inline-block;
-    float: right; }
-
   .introBox {
     width: 100%;
-    padding: 0px 20px;
     text-align: left; }
     .introBox h1 {
-      float: left; }
+      padding: 0px 20px; }
     .introBox ul {
-      display: none; }
+      text-align: center; }
+    .introBox li {
+      width: initial; }
+    .introBox ul li:nth-child(2) {
+      margin: 0px 10px; }
 
   .content {
     display: block; }

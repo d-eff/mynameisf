@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <!--[if lte IE 9]>
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/css/ie9.css">
+    <![endif]-->
+    <!--[if lt IE 9]>
     <link rel="stylesheet" type="text/css" href="/css/ie.css">
     <![endif]-->
-    <script src="modernizr.custom.20684.js" type="text/javascript"></script>
+    <script src="/js/modernizr.custom.20684.js" type="text/javascript"></script>
   </head>
   <body>
     <canvas id="canvas"></canvas>
     <div class="introBox">
       <h1><a href="/">David F</a></h1>
-      <div id="mobileMenu"><img src="/imgs/threelines_sm.png"></div>
       <section id="carouselContainer">
         <div id="carousel">
           <h6 class="carouselText">makes things on the internet.</h6>
@@ -61,7 +63,7 @@
         <p>
           Everyone agrees <a href="http://en.wikipedia.org/wiki/Flash_of_unstyled_content">FOUC</a> is bad, but lately I've been opposed to any sort of visible flash while changing pages on a single domain (unless there's meant to be a context change). I'm not sure if this feeling is driven by some nostalgia for the animated-transition-laden flash sites of my youth, or in spite of them - either way, it's strange to me to still be loading whole new pages with 40% repeated content almost a decade after AJAX became a buzzword.
           </p>
-          <p>AJAX was my first thought, but just loading in new content and popping it into parts of the page fails to update the url. I could update <span class="code">location.href</span>, but that forces a page load. We could update <span class="code">location.hash</span> - that doesn't force a reload - but that leaves an unsightly hash in the url, which gives it the feel of a jump anchor - which, in a way, it is, but that's not how I want to present it to users.</p>
+          <p>Using AJAX was my first thought, but just loading in new content and popping it into parts of the page fails to update the url. I could update <span class="code">location.href</span>, but that forces a page load. We could update <span class="code">location.hash</span> - that doesn't force a reload - but that leaves an unsightly hash in the url, which gives it the feel of a jump anchor - which, in a way, it is -  but that's not how I want to present it to users.</p>
           <p>
           Enter the HTML5 History API. The <span class="code">history</span> object stores state info for the pages you've visited in a given tab, and allows you to both navigate between states and push a new state (or replace the current one) - the trick here being that pushing/replacing a state updates the url in the browser to read however you want it to (after the hostname) without forcing a reload.  
           </p>
@@ -73,9 +75,10 @@
             <li>A <span class="code">title</span> object - the docs say it's looking for a string, but as far as I can tell this arg still isn't being used anywhere. All four major browsers (tested on Windows and Linux, at least) display the page's actual <span class="code">title</span> tag in the history.</li>
             <li>The <span class=code>URL</span> you want to use. It can be relative.</li>
           </ul>
-          <p><em>That's great, how are you actually using it?</em> At the moment this site is a single page dressed up as a multi-page site by selectively showing content based on the url. Nav links are set up like normal jump-links with hrefs pointing to #ids on the page. When one is clicked, we display that section, hide the others, and push an updated URL to the history. Like I mentioned above, updating the url via the history API doesn't refresh the page, so we only have a single
-          page to worry about loading and painting. The same index page is served up whenever as both the root and 404 pages, and then a (for lack of a better term) router reads the path and displays the appropriate section (including a 404 section).</p>
-          <p>This solution isn't all great - for one thing, everything is currently dumped into one giant HTML file. This makes updating the blog a bit ponderous, and will potentially lead to loading speed issues once the file has grown large enough. Also, while the CSS is designed to turn the page into one long one-pager and the jumplinks will still work without JS, the routing is nonfunctional without javascript. The first problem could be solved by switching from a true one-pager to
+          <p><em>That's great, how are you actually using it?</em> At the moment this site is a single page dressed up as a multi-page site by selectively showing content based on the url. Navigation consisits of normal anchor links with hrefs pointing to #ids on the page. When one is clicked, that section is displayed, the others are hidden, and an updated URL is pushed to the history. Like I mentioned above, updating the url via the history API doesn't refresh the page, so there is
+          only the single
+          page to worry about loading and painting. The same index page is served up as both the root and 404 pages, and then a router reads the path and displays the appropriate section (including one for 404s, if necessary).</p>
+          <p>This solution isn't all great - for one thing, everything is currently dumped into one giant HTML file. This makes updating the blog a bit ponderous, and will potentially lead to loading speed issues once the file grows large enough. Also, while the CSS is designed to turn the page into one long one-pager and the anchors will still work without JS, the routing is nonfunctional without javascript enabled. The first problem could be solved by switching from a true one-pager to
           dynamically loading the content with ajax while keeping the rest of the page static and retaining the history API use.</p><p>Of course, a week from now I'll probably just rebuild this whole site in Angular, or something.</p>
           <hr>
       </div>
@@ -124,14 +127,15 @@ City of Thieves - David Benioff
       <!--BEGIN WORK SECTION-->
 <div class="content" id="work">
 <ul class="workList">
-  <li><a href="http://fictionalcorp.com/chat.html"><img src="/imgs/screenChat.jpg"></a><h6><a href="http://fictionalcorp.com/chat.html">Thesaurize</a></h6><p>An off-joke about needing to improve one's english turned into a silly chat room.<br><br>Node, Express, Socket.io</p></li>
-  <li><a href="http://www.teresaflourlamb.com/"><img src="/imgs/screenFlour.jpg"></a><h6><a href="http://www.teresaflourlamb.com/">Teresa Flour Lamb</a></h6><p>Portfolio site for a friend. She designed, I built. Fully responsive.<br><br>HTML5, CSS3</p></li>
-  <li><a href="http://gabudget.org/"><img src="/imgs/screenGA.jpg"></a><h6><a href="http://gabudget.org/">GA Budget Project</a></h6><p>Working with a friend to bring more transparency and accessibility to the Georgia state budget. <strong>Work in progress.</strong><br><br>D3, Angular, Node</p></li>
-  <li><a href="http://www.southtampatitle.com/"><img src="/imgs/screenSTT.jpg"></a><h6><a href="http://www.southtampatitle.com/">South Tampa Title</a></h6><p>Site for a title company in my hometown. Responsive.<br><br>HTML5, CSS3</p></li>
+  <li><a href="http://fictionalcorp.com/chat.html"><img src="/imgs/screenChat.jpg" alt="screenshot of thesaurus chat"></a><h6><a href="http://fictionalcorp.com/chat.html">Thesaurize</a></h6><p>An off-joke about needing to improve one's english turned into a silly chat room.<br><br>Node, Express, Socket.io</p></li>
+  <li><a href="http://www.teresaflourlamb.com/"><img src="/imgs/screenFlour.jpg" alt="screenshot of T's homepage"></a><h6><a href="http://www.teresaflourlamb.com/">Teresa Flour Lamb</a></h6><p>Portfolio site for a friend. She designed, I built. Fully responsive.<br><br>HTML5, CSS3</p></li>
+  <li><a href="http://gabudget.org/"><img src="/imgs/screenGA.jpg" alt="screenshot of GA Budget Project"></a><h6><a href="http://gabudget.org/">GA Budget Project</a></h6><p>Working with a friend to bring more transparency and accessibility to the Georgia state budget. <strong>Work in progress.</strong><br><br>D3, Angular, Node</p></li>
+  <li><a href="http://www.southtampatitle.com/"><img src="/imgs/screenSTT.jpg" alt="screenshot of South Tampa Title.com homepage"></a><h6><a href="http://www.southtampatitle.com/">South Tampa Title</a></h6><p>Site for a title company in my hometown. Responsive.<br><br>HTML5, CSS3</p></li>
   <li><a href="http://content.opportunityknocks.org/"><img src="/imgs/screenOK.jpg" alt="screen shot of content.opportunityknocks.org"></a><h6><a href="http://content.opportunityknocks.org">Opportunity Knocks Blog</a></h6><p>Custom Wordpress theme for Opportunity Knocks. Matches the style of their main site.<br><br>HTML, CSS, PHP</p></li>
-  <li><a href="http://mynameisf.com/demos/horo/cats"><img src="/imgs/screenCats.jpg"></a><h6><a href="http://mynameisf.com/demos/horo/cats">Horoscope Cats</a></h6><p>In case you want to know what the stars have in store for you this week.<br><br>Javascript, cat images, whiskey</p></li>
+<!--  <li><a href="http://www.mynameisf.com/demos/CSSOff2013/"><img src="/imgs/screenCSSOff.jpg" alt="screenshot of cssoff 2013 entry"></a><h6><a href="http://www.mynameisf.com/demos/CSSOff2013/">CSSOff 2013 Entry</a></h6><p><a href="http://www.unmatchedstyle.com/cssoff/">CSSOff</a> is an awesome competition. I only had a day to spend on my entry, but I was pleased with how much I managed to accomplish.<br><br>HTML, CSS</p></li>-->
+  <li><a href="http://mynameisf.com/demos/horo/cats"><img src="/imgs/screenCats.jpg" alt="screenshot of horoscope cats"></a><h6><a href="http://mynameisf.com/demos/horo/cats">Horoscope Cats</a></h6><p>In case you want to know what the stars have in store for you this week.<br><br>Javascript, cat images, whiskey</p></li>
 
-  <li><a href="http://www.martineando.com/"><img src="/imgs/screenMartin.jpg"></a><h6><a href="http://www.martineando.com/">Martineando punto com</a></h6><p>Present for a, er, friend. MAMI LLEGO TU PAPI CON EL FUNKETE, SACUDELO.<br><br>Canvas, JS, beer (Noticing a pattern?)</p></li>
+  <li><a href="http://www.martineando.com/"><img src="/imgs/screenMartin.jpg" alt="screenshot of Martineandopuntocom"></a><h6><a href="http://www.martineando.com/">Martineando punto com</a></h6><p>Present for a, er, friend. MAMI LLEGO TU PAPI CON EL FUNKETE, SACUDELO.<br><br>Canvas, JS, beer (Noticing a pattern?)</p></li>
 </ul>
 </div>
 <!--END WORK -->
@@ -146,7 +150,7 @@ City of Thieves - David Benioff
     <tbody>
       <tr>
         <td>
-          <a href="mailto:dfernandez06@gmail.com"><img src="/imgs/email_icon.png" alt="/imgs/email_icon.png" alt="email envelope icon"></a>
+          <a href="mailto:dfernandez06@gmail.com"><img src="/imgs/email_icon.png" alt="email envelope icon"></a>
       </td>
       <td> 
         <a href="mailto:dfernandez06@gmail.com">dfernandez06@gmail.com</a>
